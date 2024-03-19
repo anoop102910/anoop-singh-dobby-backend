@@ -6,7 +6,7 @@ const fileUpload = require("express-fileupload");
 const compression = require("compression");
 const helmet = require("helmet")
 
-const { mongoUrI ,server_url} = require("./config/config");
+const { DB_URI ,CLIENT_URI} = require("./config/config");
 const imageRoute = require("./routes/image.route");
 const authRoute= require('./routes/auth.route');
 
@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(fileUpload({ limits: { fileSize: "10*1024*1024" } }));
 app.use(
   cors({
-    origin: server_url,
+    origin: CLIENT_URI,
     methods: "GET, POST, PUT, DELETE",
     credentials: true,
   })
@@ -40,7 +40,7 @@ app.get("*", (req, res) => {
 });
 
 mongoose
-  .connect(mongoUrI, {
+  .connect(DB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
-const {jwt_secret_key} = require('../config/config')
+const {JWT_SECRET_KEY} = require('../config/config')
 const User = require('../models/user.model')
 
 const signup = async (req, res) => {
@@ -35,7 +35,7 @@ const signup = async (req, res) => {
 
     const token = jwt.sign(
       { userId: user._id, username: user.firstName + " " + user.lastName },
-      jwt_secret_key,
+      JWT_SECRET_KEY,
       { expiresIn: "24h" }
     );
     console.log(token);
@@ -66,7 +66,7 @@ const signin = async (req, res) => {
     const tokenVal = { userId: user._id, username: user.firstName + " " + user.lastName };
     if (user.profileImage) tokenVal.profileImage = user.profileImage;
 
-    const token = jwt.sign(tokenVal, jwt_secret_key, { expiresIn: "24h" });
+    const token = jwt.sign(tokenVal, JWT_SECRET_KEY, { expiresIn: "24h" });
     console.log(token);
     res.setHeader("Authorization", `Bearer ${token}`);
     res.set("Access-Control-Expose-Headers", "Authorization");
