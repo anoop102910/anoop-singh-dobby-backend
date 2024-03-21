@@ -1,10 +1,10 @@
 const cloudinary = require('cloudinary').v2;
 const streamifier = require('streamifier');
-
+const {CLOUDINARY_CLOUD_NAME,CLOUDINARY_API_KEY,CLOUDINARY_API_SECRET} = require('../config/config')
 cloudinary.config({
-  cloud_name: "dt0h1catc",
-  api_key: "744251838659272",
-  api_secret: "tqK4VpH2piIxWXdbvJ8Z7wTWQ3U",
+  cloud_name: CLOUDINARY_CLOUD_NAME,
+  api_key: CLOUDINARY_API_KEY,
+  api_secret: CLOUDINARY_API_SECRET,
 });
 
 const uploadImageToCloudinary = async (buffer, width) => {
